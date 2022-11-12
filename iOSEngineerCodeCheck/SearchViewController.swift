@@ -13,8 +13,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 
     var repositories: [[String: Any]] = []
     var task: URLSessionTask?
-    var searchWord: String!
-    var url: String!
     var index: Int!
 
     override func viewDidLoad() {
@@ -34,21 +32,26 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchWord = searchBar.text!
-        if searchWord.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(searchWord!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
-                if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = object["items"] as? [[String: Any]] {
-                        self.repositories = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
-            }
-            task?.resume()
+        guard let searchWord = searchBar.text else { return }
+        if searchWord.isEmpty { return }
+        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else {
+            print("エンコードに失敗しました")
+            return
         }
+
+        task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            guard let json = try? JSONSerialization.jsonObject(with: data) else { return }
+            guard let object = json as? [String: Any] else { return }
+            guard let items = object["items"] as? [[String: Any]] else { return }
+
+            self.repositories = items
+
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        task?.resume()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
