@@ -13,7 +13,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 
     var repositories: [[String: Any]] = []
     var task: URLSessionTask?
-    var index: Int!
+    var selectedIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        index = indexPath.row
+        selectedIndex = indexPath.row
         performSegue(withIdentifier: "Detail", sender: self)
     }
 

@@ -17,11 +17,15 @@ class RepositoryDetailViewController: UIViewController {
     @IBOutlet weak var forksCountLabel: UILabel!
     @IBOutlet weak var openIssuesCountLabel: UILabel!
 
-    var searchViewController: SearchViewController!
+    var searchViewController: SearchViewController?
+    private var repository: [String: Any] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let repository = searchViewController.repositories[searchViewController.index]
+        guard let searchViewController = searchViewController else { return }
+        guard let selectedIndex = searchViewController.selectedIndex else { return }
+
+        repository = searchViewController.repositories[selectedIndex]
 
         languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
         stargazersCountLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
@@ -32,8 +36,6 @@ class RepositoryDetailViewController: UIViewController {
     }
 
     func getImage() {
-        let repository = searchViewController.repositories[searchViewController.index]
-
         titleLabel.text = repository["full_name"] as? String
 
         guard let owner = repository["owner"] as? [String: Any] else { return }
