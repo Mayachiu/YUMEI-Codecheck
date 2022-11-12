@@ -11,7 +11,7 @@ import UIKit
 class SearchViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var repositories: [[String: Any]]=[]
+    var repositories: [[String: Any]] = []
     var task: URLSessionTask?
     var searchWord: String!
     var url: String!
@@ -54,7 +54,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail"{
+        if segue.identifier == "Detail" {
             let repositoryDetailViewController = segue.destination as! RepositoryDetailViewController
             repositoryDetailViewController.searchViewController = self
         }

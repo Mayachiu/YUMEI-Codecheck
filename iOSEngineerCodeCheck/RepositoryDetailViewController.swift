@@ -31,7 +31,7 @@ class RepositoryDetailViewController: UIViewController {
         getImage()
     }
 
-    func getImage(){
+    func getImage() {
         let repository = searchViewController.repositories[searchViewController.index]
 
         titleLabel.text = repository["full_name"] as? String
