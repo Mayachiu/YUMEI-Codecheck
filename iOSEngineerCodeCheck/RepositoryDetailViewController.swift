@@ -36,16 +36,20 @@ class RepositoryDetailViewController: UIViewController {
 
         titleLabel.text = repository["full_name"] as? String
 
-        if let owner = repository["owner"] as? [String: Any] {
-            if let avatarImageURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: avatarImageURL)!) { (data, response, error) in
-                    let avatarImage = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.avatarImageView.image = avatarImage
-                    }
-                }.resume()
+        guard let owner = repository["owner"] as? [String: Any] else { return }
+        guard let avatarImageURLString = owner["avatar_url"] as? String else { return }
+        guard let avatarImageURL = URL(string: avatarImageURLString) else { return }
+
+        URLSession.shared.dataTask(with: avatarImageURL) { (data, response, error) in
+            guard let data = data else { return }
+            guard let image = UIImage(data: data) else { return }
+            
+            let avatarImage = image
+
+            DispatchQueue.main.async {
+                self.avatarImageView.image = avatarImage
             }
-        }
+        }.resume()
     }
 
 
