@@ -9,10 +9,10 @@
 import UIKit
 
 class SearchViewController: UITableViewController, UISearchBarDelegate {
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
 
     var repositories: [[String: Any]] = []
-    var task: URLSessionTask?
+    private var task: URLSessionTask?
     var selectedIndex: Int?
 
     override func viewDidLoad() {

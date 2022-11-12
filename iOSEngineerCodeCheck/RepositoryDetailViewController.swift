@@ -9,13 +9,13 @@
 import UIKit
 
 class RepositoryDetailViewController: UIViewController {
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var languageLabel: UILabel!
-    @IBOutlet weak var stargazersCountLabel: UILabel!
-    @IBOutlet weak var watchersCountLabel: UILabel!
-    @IBOutlet weak var forksCountLabel: UILabel!
-    @IBOutlet weak var openIssuesCountLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var languageLabel: UILabel!
+    @IBOutlet private weak var stargazersCountLabel: UILabel!
+    @IBOutlet private weak var watchersCountLabel: UILabel!
+    @IBOutlet private weak var forksCountLabel: UILabel!
+    @IBOutlet private weak var openIssuesCountLabel: UILabel!
 
     var searchViewController: SearchViewController?
     private var repository: [String: Any] = [:]
@@ -35,7 +35,7 @@ class RepositoryDetailViewController: UIViewController {
         getImage()
     }
 
-    func getImage() {
+    private func getImage() {
         titleLabel.text = repository["full_name"] as? String
 
         guard let owner = repository["owner"] as? [String: Any] else { return }
