@@ -45,15 +45,15 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
             task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
                 if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
                     if let items = object["items"] as? [[String: Any]] {
-                    self.repositories = items
+                        self.repositories = items
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
                     }
                 }
             }
-        // これ呼ばなきゃリストが更新されません
-        task?.resume()
+            // これ呼ばなきゃリストが更新されません
+            task?.resume()
         }
         
     }
