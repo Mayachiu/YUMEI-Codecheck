@@ -39,7 +39,8 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
             return
         }
 
-        task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let self = self else { return }
             guard let data = data else { return }
             guard let json = try? JSONSerialization.jsonObject(with: data) else { return }
             guard let object = json as? [String: Any] else { return }

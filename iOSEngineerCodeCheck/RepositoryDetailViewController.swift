@@ -42,7 +42,8 @@ class RepositoryDetailViewController: UIViewController {
         guard let avatarImageURLString = owner["avatar_url"] as? String else { return }
         guard let avatarImageURL = URL(string: avatarImageURLString) else { return }
 
-        URLSession.shared.dataTask(with: avatarImageURL) { (data, response, error) in
+        URLSession.shared.dataTask(with: avatarImageURL) { [weak self] (data, response, error) in
+            guard let self = self else { return }
             guard let data = data else { return }
             guard let image = UIImage(data: data) else { return }
             
