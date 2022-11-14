@@ -114,6 +114,38 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6752A1452922C36100AAEDEF /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				6752A13529209C1400AAEDEF /* APIClient.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		6752A1462922C37400AAEDEF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6752A13929209DC300AAEDEF /* GitHubEntity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6752A1472922C39A00AAEDEF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6752A1412922C0B800AAEDEF /* UIImageView+URL.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6752A1482922C3B200AAEDEF /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				6752A13B2920A02A00AAEDEF /* APIError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -141,10 +173,10 @@
 			children = (
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				6752A13529209C1400AAEDEF /* APIClient.swift */,
-				6752A1412922C0B800AAEDEF /* UIImageView+URL.swift */,
-				6752A13B2920A02A00AAEDEF /* APIError.swift */,
-				6752A13929209DC300AAEDEF /* GitHubEntity.swift */,
+				6752A1472922C39A00AAEDEF /* Extension */,
+				6752A1482922C3B200AAEDEF /* Error */,
+				6752A1462922C37400AAEDEF /* Model */,
+				6752A1452922C36100AAEDEF /* Repository */,
 				BFD945E2244DC5E80012785A /* SearchViewController.swift */,
 				BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
