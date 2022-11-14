@@ -34,10 +34,10 @@ class RepositoryDetailViewController: UIViewController {
         forksCountLabel.text = "\(repository.forksCount) forks"
         openIssuesCountLabel.text = "\(repository.openIssuesCount) open issues"
 
-        getImage(repository)
+        configureAvatarImage(repository)
     }
 
-    private func getImage(_ repository: Repository) {
+    private func configureAvatarImage(_ repository: Repository) {
         guard let avatarImageURLString = repository.owner.avatarURL else { return }
         Nuke.loadImage(with: avatarImageURLString, into: self.avatarImageView)
     }
