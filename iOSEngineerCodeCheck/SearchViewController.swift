@@ -11,7 +11,7 @@ import UIKit
 class SearchViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet private weak var searchBar: UISearchBar!
 
-    var repositories: [[String: Any]] = []
+    var repositories: [Repository] = []
     private var task: URLSessionTask?
     var selectedIndex: Int?
 
@@ -33,26 +33,18 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text else { return }
-        if searchWord.isEmpty { return }
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else {
-            print("エンコードに失敗しました")
-            return
-        }
-
-        task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+        APIClient.fetchRepository(searchWord: searchWord, completion: { [weak self] result in
             guard let self = self else { return }
-            guard let data = data else { return }
-            guard let json = try? JSONSerialization.jsonObject(with: data) else { return }
-            guard let object = json as? [String: Any] else { return }
-            guard let items = object["items"] as? [[String: Any]] else { return }
-
-            self.repositories = items
-
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            switch result {
+            case .success(let gitHubResponse):
+                self.repositories = gitHubResponse.items
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
             }
-        }
-        task?.resume()
+        })
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -71,8 +63,8 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let repository = repositories[indexPath.row]
-        cell.textLabel?.text = repository["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
+        cell.textLabel?.text = repository.fullName
+        cell.detailTextLabel?.text = repository.language
         cell.tag = indexPath.row
         return cell
     }
