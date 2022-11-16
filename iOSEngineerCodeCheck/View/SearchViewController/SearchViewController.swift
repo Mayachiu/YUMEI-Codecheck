@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
 
@@ -29,6 +29,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
     }
 
+    private func prepareRepositoryDetailViewController () {
+        let repositoryDetailViewController = RepositoryDetailViewController()
+        repositoryDetailViewController.searchViewController = self
+        navigationController?.pushViewController(repositoryDetailViewController, animated: true)
+    }
+
+
+}
+
+extension SearchViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         // 初期テキストの消去
         searchBar.text = ""
@@ -54,13 +64,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             }
         })
     }
+}
 
-    private func prepareRepositoryDetailViewController () {
-        let repositoryDetailViewController = RepositoryDetailViewController()
-        repositoryDetailViewController.searchViewController = self
-        navigationController?.pushViewController(repositoryDetailViewController, animated: true)
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        prepareRepositoryDetailViewController()
     }
+}
 
+extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repositories.count
     }
@@ -73,11 +86,4 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         cell.tag = indexPath.row
         return cell
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        prepareRepositoryDetailViewController()
-    }
-
-
 }
