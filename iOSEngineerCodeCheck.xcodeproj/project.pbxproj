@@ -14,7 +14,6 @@
 		6752A13C2920A02A00AAEDEF /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6752A13B2920A02A00AAEDEF /* APIError.swift */; };
 		6752A1422922C0B800AAEDEF /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6752A1412922C0B800AAEDEF /* UIImageView+URL.swift */; };
 		6752A14C2922CE3700AAEDEF /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6752A14B2922CE3700AAEDEF /* SearchViewController.xib */; };
-		6788C0A429255BFB00CE4F5D /* iOSEngineerCodeCheck in Resources */ = {isa = PBXBuildFile; fileRef = 6788C0A329255BFB00CE4F5D /* iOSEngineerCodeCheck */; };
 		678BF34B292488A500027300 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BF34A292488A500027300 /* SearchPresenter.swift */; };
 		678BF34D292519C100027300 /* RepositoryDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BF34C292519C000027300 /* RepositoryDetailPresenter.swift */; };
 		67A4A7572923BC100015719C /* RepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4A7552923BC100015719C /* RepositoryCell.swift */; };
@@ -61,7 +60,6 @@
 		6752A13B2920A02A00AAEDEF /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		6752A1412922C0B800AAEDEF /* UIImageView+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
 		6752A14B2922CE3700AAEDEF /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		6788C0A329255BFB00CE4F5D /* iOSEngineerCodeCheck */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iOSEngineerCodeCheck; sourceTree = "<group>"; };
 		678BF34A292488A500027300 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		678BF34C292519C000027300 /* RepositoryDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailPresenter.swift; sourceTree = "<group>"; };
 		67A4A7552923BC100015719C /* RepositoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCell.swift; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 			children = (
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				6788C0A329255BFB00CE4F5D /* iOSEngineerCodeCheck */,
 				6752A1452922C36100AAEDEF /* Repository */,
 				6752A1462922C37400AAEDEF /* Model */,
 				670357672924824500891DEC /* View */,
@@ -386,7 +383,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */,
-				6788C0A429255BFB00CE4F5D /* iOSEngineerCodeCheck in Resources */,
 				67A4A75C29241E540015719C /* RepositoryDetailViewController.xib in Resources */,
 				BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */,
 				6752A14C2922CE3700AAEDEF /* SearchViewController.xib in Resources */,
@@ -741,6 +737,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S7G9J68NLX;
 				INFOPLIST_FILE = iOSEngineerCodeCheckTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -763,6 +760,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S7G9J68NLX;
 				INFOPLIST_FILE = iOSEngineerCodeCheckTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -784,6 +782,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S7G9J68NLX;
 				INFOPLIST_FILE = iOSEngineerCodeCheckUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -805,6 +804,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S7G9J68NLX;
 				INFOPLIST_FILE = iOSEngineerCodeCheckUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
