@@ -18,30 +18,34 @@ final class RepositoryDetailViewController: UIViewController {
     @IBOutlet private weak var forksCountLabel: UILabel!
     @IBOutlet private weak var openIssuesCountLabel: UILabel!
 
+    private var presenter: RepositoryDetailPresenterInput!
     var selectedIndex: Int?
     var repositories: [Repository]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = RepositoryDetailPresenter.init(view: self)
+
         guard let selectedIndex = selectedIndex else { return }
         guard let repositories = repositories else { return }
 
-        let repository = repositories[selectedIndex]
+        presenter.viewDidLoad(repository: repositories[selectedIndex])
+    }
 
+
+}
+
+extension RepositoryDetailViewController: RepositoryDetailPresenterOutput {
+    func configureText(_ repository: Repository) {
         titleLabel.text = repository.fullName
         languageLabel.text = "Written in \(repository.language ?? "")"
         stargazersCountLabel.text = "\(repository.stargazersCount) stars"
         watchersCountLabel.text = "\(repository.watchersCount) watchers"
         forksCountLabel.text = "\(repository.forksCount) forks"
         openIssuesCountLabel.text = "\(repository.openIssuesCount) open issues"
-
-        configureAvatarImage(repository)
     }
 
-    private func configureAvatarImage(_ repository: Repository) {
-        guard let avatarImageURLString = repository.owner.avatarURL else { return }
+    func configureAvatarImage(_ avatarImageURLString: String) {
         Nuke.loadImage(with: avatarImageURLString, into: self.avatarImageView)
     }
-
-
 }
