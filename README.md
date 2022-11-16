@@ -1,14 +1,24 @@
 # 株式会社ゆめみ iOS エンジニアコードチェック課題
 期間: 11/10 ~ 11/17
 
-環境
+## 環境
 - Xcode 14.1
 - Swift 5.7.1
 - iOS14.0
+- CocoaPods 1.11.3
 
-アーキテクチャ： MVP（Passive View）
+## セットアップ
+YUMEI-Codecheck下で
 
-使用ライブラリ
+```
+pod install
+```
+iOSEngineerCodeCheck.xcworkspaceが生成され、これを利用する。
+
+## アーキテクチャ
+MVP（Passive View）
+
+## 使用ライブラリ
 - Nuke（画像処理）
 - Sourcery（モック自動生成）
 
