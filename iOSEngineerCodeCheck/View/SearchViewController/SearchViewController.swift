@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 final class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -88,5 +89,13 @@ extension SearchViewController: SearchPresenterOutput {
     func configureRepositoryCellText(fullName: String, language: String?) {
         self.fullName = fullName
         self.language = language
+    }
+
+    func showHud() {
+        HUD.show(.progress)
+    }
+
+    func hideHud() {
+        HUD.hide()
     }
 }

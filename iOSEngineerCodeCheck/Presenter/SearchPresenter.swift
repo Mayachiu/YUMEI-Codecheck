@@ -20,6 +20,8 @@ protocol SearchPresenterOutput: AnyObject {
     func reloadTableView()
     func presentRepositoryViewController(selectedIndex: Int, repositories: [Repository])
     func configureRepositoryCellText(fullName: String, language: String?)
+    func showHud()
+    func hideHud()
 }
 
 final class SearchPresenter {
@@ -34,6 +36,9 @@ final class SearchPresenter {
 
 extension SearchPresenter: SearchPresenterInput {
     func searchButtonClicked(searchWord: String) {
+        if searchWord.count != 0 {
+            view?.showHud()
+        }
         APIClient.fetchRepository(searchWord: searchWord, completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -41,6 +46,7 @@ extension SearchPresenter: SearchPresenterInput {
                 self.repositories = gitHubResponse.items
                 DispatchQueue.main.async {
                     self.view?.reloadTableView()
+                    self.view?.hideHud()
                 }
             case .failure(let error):
                 print(error)
