@@ -111,4 +111,28 @@ extension SearchViewController: SearchPresenterOutput {
         config.presentationStyle = .center
         SwiftMessages.show(config: config, view: view)
     }
+
+    func showNetworkErrorAlert() {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(.error)
+        view.configureContent(title: "ネットワークエラーです", body: "")
+        view.button?.isHidden = true
+        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+        var config = SwiftMessages.Config()
+        config.presentationStyle = .center
+        SwiftMessages.show(config: config, view: view)
+    }
+
+    func showSearchResultsNotFountAlert() {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(.warning)
+        view.configureContent(title: "検索結果がみつかりませんでした", body: "")
+        view.button?.isHidden = true
+        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+        var config = SwiftMessages.Config()
+        config.presentationStyle = .center
+        SwiftMessages.show(config: config, view: view)
+    }
 }

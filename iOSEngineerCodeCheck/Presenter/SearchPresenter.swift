@@ -23,6 +23,8 @@ protocol SearchPresenterOutput: AnyObject {
     func showHud()
     func hideHud()
     func showNothingEnteredAlert()
+    func showNetworkErrorAlert()
+    func showSearchResultsNotFountAlert()
 }
 
 final class SearchPresenter {
@@ -41,17 +43,29 @@ extension SearchPresenter: SearchPresenterInput {
             view?.showHud()
         } else {
             view?.showNothingEnteredAlert()
+            return
         }
         APIClient.fetchRepository(searchWord: searchWord, completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let gitHubResponse):
                 self.repositories = gitHubResponse.items
-                DispatchQueue.main.async {
-                    self.view?.reloadTableView()
-                    self.view?.hideHud()
+                if self.repositories.count == 0 {
+                    DispatchQueue.main.async {
+                        self.view?.hideHud()
+                        self.view?.showSearchResultsNotFountAlert()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.view?.reloadTableView()
+                        self.view?.hideHud()
+                    }
                 }
             case .failure(let error):
+                DispatchQueue.main.async {
+                    self.view?.hideHud()
+                    self.view?.showNetworkErrorAlert()
+                }
                 print(error)
             }
         })
