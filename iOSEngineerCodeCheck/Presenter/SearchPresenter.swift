@@ -15,6 +15,7 @@ protocol SearchPresenterInput {
     func cellForRowAt(at indexPath: IndexPath)
 }
 
+// sourcery: AutoMockable
 protocol SearchPresenterOutput: AnyObject {
     func reloadTableView()
     func presentRepositoryViewController(selectedIndex: Int, repositories: [Repository])

@@ -12,6 +12,7 @@ protocol RepositoryDetailPresenterInput {
     func viewDidLoad(repository: Repository)
 }
 
+// sourcery: AutoMockable
 protocol RepositoryDetailPresenterOutput: AnyObject {
     func configureText(_ repository: Repository)
     func configureAvatarImage(_ avatarImageURLString: String)
