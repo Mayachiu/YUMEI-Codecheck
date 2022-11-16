@@ -7,6 +7,7 @@ target 'iOSEngineerCodeCheck' do
   pod 'Nuke' 
   pod 'Sourcery'
   pod 'PKHUD', '~> 5.0'
+  pod 'SwiftMessages'
   # Pods for iOSEngineerCodeCheck
 
   target 'iOSEngineerCodeCheckTests' do
