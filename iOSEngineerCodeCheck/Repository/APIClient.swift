@@ -25,6 +25,8 @@ enum APIClient {
                     } catch {
                         completion(.failure(.decodeError))
                     }
+                } else {
+                    completion(.failure(.networkError))
                 }
             }
             task.resume()
