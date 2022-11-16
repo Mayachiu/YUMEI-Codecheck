@@ -6,6 +6,7 @@ target 'iOSEngineerCodeCheck' do
   use_frameworks!
   pod 'Nuke' 
   pod 'Sourcery'
+  pod 'PKHUD', '~> 5.0'
   # Pods for iOSEngineerCodeCheck
 
   target 'iOSEngineerCodeCheckTests' do
