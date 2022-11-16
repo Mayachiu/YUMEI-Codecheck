@@ -26,8 +26,9 @@ final class SearchPresenter {
     private weak var view: SearchPresenterOutput?
     var repositories: [Repository] = []
     var selectedIndex: Int = 0
-    init(view: SearchPresenterOutput) {
+    init(view: SearchPresenterOutput, repositories: [Repository]) {
         self.view = view
+        self.repositories = repositories
     }
 }
 

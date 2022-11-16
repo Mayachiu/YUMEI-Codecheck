@@ -20,7 +20,7 @@ final class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = SearchPresenter.init(view: self)
+        presenter = SearchPresenter.init(view: self, repositories: [])
 
         navigationItem.title = "Search View Controller"
 
