@@ -24,7 +24,7 @@ final class SearchViewController: UIViewController {
 
         navigationItem.title = "Search View Controller"
 
-        searchBar.text = "GitHubのリポジトリを検索できるよー"
+        searchBar.placeholder = "キーワードを入力してください"
         searchBar.delegate = self
 
         tableView.delegate = self
