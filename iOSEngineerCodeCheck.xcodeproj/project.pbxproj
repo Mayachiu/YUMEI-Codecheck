@@ -120,6 +120,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		670357672924824500891DEC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				670357682924826900891DEC /* SearchViewController */,
+				678BF347292482C700027300 /* RepositoryCell */,
+				6703576A2924828D00891DEC /* RepositoryDetailViewController */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		670357682924826900891DEC /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945E2244DC5E80012785A /* SearchViewController.swift */,
+				6752A14B2922CE3700AAEDEF /* SearchViewController.xib */,
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		6703576A2924828D00891DEC /* RepositoryDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */,
+				67A4A75B29241E540015719C /* RepositoryDetailViewController.xib */,
+			);
+			name = RepositoryDetailViewController;
+			sourceTree = "<group>";
+		};
 		6752A1452922C36100AAEDEF /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +180,15 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		678BF347292482C700027300 /* RepositoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				67A4A7552923BC100015719C /* RepositoryCell.swift */,
+				67A4A7562923BC100015719C /* RepositoryCell.xib */,
+			);
+			path = RepositoryCell;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -179,16 +216,11 @@
 			children = (
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
+				6752A1452922C36100AAEDEF /* Repository */,
+				6752A1462922C37400AAEDEF /* Model */,
+				670357672924824500891DEC /* View */,
 				6752A1472922C39A00AAEDEF /* Extension */,
 				6752A1482922C3B200AAEDEF /* Error */,
-				6752A1462922C37400AAEDEF /* Model */,
-				6752A1452922C36100AAEDEF /* Repository */,
-				BFD945E2244DC5E80012785A /* SearchViewController.swift */,
-				6752A14B2922CE3700AAEDEF /* SearchViewController.xib */,
-				67A4A75B29241E540015719C /* RepositoryDetailViewController.xib */,
-				BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */,
-				67A4A7552923BC100015719C /* RepositoryCell.swift */,
-				67A4A7562923BC100015719C /* RepositoryCell.xib */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
