@@ -9,7 +9,7 @@
 import UIKit
 import Nuke
 
-class RepositoryDetailViewController: UIViewController {
+final class RepositoryDetailViewController: UIViewController {
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var languageLabel: UILabel!
@@ -18,29 +18,34 @@ class RepositoryDetailViewController: UIViewController {
     @IBOutlet private weak var forksCountLabel: UILabel!
     @IBOutlet private weak var openIssuesCountLabel: UILabel!
 
-    var searchViewController: SearchViewController?
+    private var presenter: RepositoryDetailPresenterInput!
+    var selectedIndex: Int?
+    var repositories: [Repository]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let searchViewController = searchViewController else { return }
-        guard let selectedIndex = searchViewController.selectedIndex else { return }
+        presenter = RepositoryDetailPresenter.init(view: self)
 
-        let repository = searchViewController.repositories[selectedIndex]
+        guard let selectedIndex = selectedIndex else { return }
+        guard let repositories = repositories else { return }
 
+        presenter.viewDidLoad(repository: repositories[selectedIndex])
+    }
+
+
+}
+
+extension RepositoryDetailViewController: RepositoryDetailPresenterOutput {
+    func configureText(_ repository: Repository) {
         titleLabel.text = repository.fullName
         languageLabel.text = "Written in \(repository.language ?? "")"
         stargazersCountLabel.text = "\(repository.stargazersCount) stars"
         watchersCountLabel.text = "\(repository.watchersCount) watchers"
         forksCountLabel.text = "\(repository.forksCount) forks"
         openIssuesCountLabel.text = "\(repository.openIssuesCount) open issues"
-
-        configureAvatarImage(repository)
     }
 
-    private func configureAvatarImage(_ repository: Repository) {
-        guard let avatarImageURLString = repository.owner.avatarURL else { return }
+    func configureAvatarImage(_ avatarImageURLString: String) {
         Nuke.loadImage(with: avatarImageURLString, into: self.avatarImageView)
     }
-
-
 }
