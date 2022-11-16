@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="iOSEngineerCodeCheck" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="6ct-XP-wFi" id="kaa-Ue-4BN"/>
+                <outlet property="tableView" destination="NYM-aj-7tF" id="2Ts-yR-Nx7"/>
+                <outlet property="view" destination="iN0-l3-epB" id="31l-Jj-nkJ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXp-8l-WtD">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="6ct-XP-wFi">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="PVm-cc-Rom"/>
+                            </connections>
+                        </searchBar>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NYM-aj-7tF">
+                            <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="NYM-aj-7tF" firstAttribute="top" secondItem="6ct-XP-wFi" secondAttribute="bottom" id="0iP-N9-4Ot"/>
+                        <constraint firstItem="6ct-XP-wFi" firstAttribute="top" secondItem="JXp-8l-WtD" secondAttribute="top" id="RUU-JX-B2o"/>
+                        <constraint firstItem="NYM-aj-7tF" firstAttribute="leading" secondItem="JXp-8l-WtD" secondAttribute="leading" id="T0f-MV-23l"/>
+                        <constraint firstAttribute="trailing" secondItem="6ct-XP-wFi" secondAttribute="trailing" id="UKd-Yl-GKj"/>
+                        <constraint firstAttribute="bottom" secondItem="NYM-aj-7tF" secondAttribute="bottom" id="bgD-QL-eXR"/>
+                        <constraint firstAttribute="trailing" secondItem="NYM-aj-7tF" secondAttribute="trailing" id="nJm-q4-3Ar"/>
+                        <constraint firstItem="6ct-XP-wFi" firstAttribute="leading" secondItem="JXp-8l-WtD" secondAttribute="leading" id="tEf-cA-In8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="JXp-8l-WtD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LXC-TK-eAA"/>
+                <constraint firstItem="JXp-8l-WtD" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="SEF-E5-MxJ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="JXp-8l-WtD" secondAttribute="bottom" id="e3p-1F-1gG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="JXp-8l-WtD" secondAttribute="trailing" id="gAZ-pv-dif"/>
+                <constraint firstItem="JXp-8l-WtD" firstAttribute="height" secondItem="vUN-kp-3ea" secondAttribute="height" id="zIV-hT-TmC"/>
+            </constraints>
+            <point key="canvasLocation" x="53.02325581395349" y="-11.587982832618026"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

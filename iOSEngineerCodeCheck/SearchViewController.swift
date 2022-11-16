@@ -8,8 +8,9 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController, UISearchBarDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
 
     var repositories: [Repository] = []
     private var task: URLSessionTask?
@@ -17,8 +18,15 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Search View Controller"
+
         searchBar.text = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
     }
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -47,31 +55,28 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         })
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail" {
-            guard let repositoryDetailViewController = segue.destination as? RepositoryDetailViewController else {
-                fatalError()
-            }
-            repositoryDetailViewController.searchViewController = self
-        }
+    private func prepareRepositoryDetailViewController () {
+        let repositoryDetailViewController = RepositoryDetailViewController()
+        repositoryDetailViewController.searchViewController = self
+        navigationController?.pushViewController(repositoryDetailViewController, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repositories.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as! RepositoryCell
         let repository = repositories[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.language
+        cell.titleLabel.text = repository.fullName
+        cell.detailLabel.text = repository.language ?? "-"
         cell.tag = indexPath.row
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        prepareRepositoryDetailViewController()
     }
 
 
