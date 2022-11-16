@@ -18,14 +18,15 @@ final class RepositoryDetailViewController: UIViewController {
     @IBOutlet private weak var forksCountLabel: UILabel!
     @IBOutlet private weak var openIssuesCountLabel: UILabel!
 
-    var searchViewController: SearchViewController?
+    var selectedIndex: Int?
+    var repositories: [Repository]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let searchViewController = searchViewController else { return }
-        guard let selectedIndex = searchViewController.selectedIndex else { return }
+        guard let selectedIndex = selectedIndex else { return }
+        guard let repositories = repositories else { return }
 
-        let repository = searchViewController.repositories[selectedIndex]
+        let repository = repositories[selectedIndex]
 
         titleLabel.text = repository.fullName
         languageLabel.text = "Written in \(repository.language ?? "")"

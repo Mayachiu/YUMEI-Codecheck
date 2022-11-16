@@ -12,12 +12,16 @@ final class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
 
-    var repositories: [Repository] = []
+    private var presenter: SearchPresenterInput!
+    private var fullName: String = ""
+    private var language: String? = ""
+
     private var task: URLSessionTask?
-    var selectedIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = SearchPresenter.init(view: self)
+
         navigationItem.title = "Search View Controller"
 
         searchBar.text = "GitHubのリポジトリを検索できるよー"
@@ -28,14 +32,6 @@ final class SearchViewController: UIViewController {
 
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
     }
-
-    private func prepareRepositoryDetailViewController () {
-        let repositoryDetailViewController = RepositoryDetailViewController()
-        repositoryDetailViewController.searchViewController = self
-        navigationController?.pushViewController(repositoryDetailViewController, animated: true)
-    }
-
-
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -51,39 +47,46 @@ extension SearchViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text else { return }
-        APIClient.fetchRepository(searchWord: searchWord, completion: { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let gitHubResponse):
-                self.repositories = gitHubResponse.items
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        })
+        presenter.searchButtonClicked(searchWord: searchWord)
     }
 }
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        prepareRepositoryDetailViewController()
+        presenter.didSelectRowAt(at: indexPath)
     }
 }
 
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
+        presenter.numberOfRowsInSection()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        presenter.cellForRowAt(at: indexPath)
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as! RepositoryCell
-        let repository = repositories[indexPath.row]
-        cell.titleLabel.text = repository.fullName
-        cell.detailLabel.text = repository.language ?? "-"
+        cell.titleLabel.text = self.fullName
+        cell.detailLabel.text = self.language ?? "-"
         cell.tag = indexPath.row
         return cell
+    }
+}
+
+extension SearchViewController: SearchPresenterOutput {
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+
+    func presentRepositoryViewController(selectedIndex: Int, repositories: [Repository]) {
+        let repositoryDetailViewController = RepositoryDetailViewController()
+        repositoryDetailViewController.selectedIndex = selectedIndex
+        repositoryDetailViewController.repositories = repositories
+        navigationController?.pushViewController(repositoryDetailViewController, animated: true)
+    }
+
+    func configureRepositoryCellText(fullName: String, language: String?) {
+        self.fullName = fullName
+        self.language = language
     }
 }
