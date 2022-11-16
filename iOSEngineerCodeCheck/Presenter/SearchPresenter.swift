@@ -22,6 +22,7 @@ protocol SearchPresenterOutput: AnyObject {
     func configureRepositoryCellText(fullName: String, language: String?)
     func showHud()
     func hideHud()
+    func showNothingEnteredAlert()
 }
 
 final class SearchPresenter {
@@ -38,6 +39,8 @@ extension SearchPresenter: SearchPresenterInput {
     func searchButtonClicked(searchWord: String) {
         if searchWord.count != 0 {
             view?.showHud()
+        } else {
+            view?.showNothingEnteredAlert()
         }
         APIClient.fetchRepository(searchWord: searchWord, completion: { [weak self] result in
             guard let self = self else { return }

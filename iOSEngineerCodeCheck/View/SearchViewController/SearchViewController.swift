@@ -8,6 +8,7 @@
 
 import UIKit
 import PKHUD
+import SwiftMessages
 
 final class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -97,5 +98,17 @@ extension SearchViewController: SearchPresenterOutput {
 
     func hideHud() {
         HUD.hide()
+    }
+
+    func showNothingEnteredAlert() {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(.warning)
+        view.configureContent(title: "何も入力されていません", body: "")
+        view.button?.isHidden = true
+        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+        var config = SwiftMessages.Config()
+        config.presentationStyle = .center
+        SwiftMessages.show(config: config, view: view)
     }
 }
