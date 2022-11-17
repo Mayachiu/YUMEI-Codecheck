@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PKHUD
+import SwiftMessages
 
 final class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -24,11 +26,13 @@ final class SearchViewController: UIViewController {
 
         navigationItem.title = "Search View Controller"
 
-        searchBar.text = "GitHubのリポジトリを検索できるよー"
+        searchBar.placeholder = "キーワードを入力してください"
         searchBar.delegate = self
 
         tableView.delegate = self
         tableView.dataSource = self
+
+        tableView.keyboardDismissMode = .onDrag
 
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
     }
@@ -88,5 +92,25 @@ extension SearchViewController: SearchPresenterOutput {
     func configureRepositoryCellText(fullName: String, language: String?) {
         self.fullName = fullName
         self.language = language
+    }
+
+    func showHud() {
+        HUD.show(.progress)
+    }
+
+    func hideHud() {
+        HUD.hide()
+    }
+
+    func showNothingEnteredAlert() {
+        configureSearchResultsNotFountAlert()
+    }
+
+    func showNetworkErrorAlert() {
+        configureNetworkErrorAlert()
+    }
+
+    func showSearchResultsNotFountAlert() {
+        configureSearchResultsNotFountAlert()
     }
 }

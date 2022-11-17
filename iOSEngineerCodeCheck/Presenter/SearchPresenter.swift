@@ -20,6 +20,11 @@ protocol SearchPresenterOutput: AnyObject {
     func reloadTableView()
     func presentRepositoryViewController(selectedIndex: Int, repositories: [Repository])
     func configureRepositoryCellText(fullName: String, language: String?)
+    func showHud()
+    func hideHud()
+    func showNothingEnteredAlert()
+    func showNetworkErrorAlert()
+    func showSearchResultsNotFountAlert()
 }
 
 final class SearchPresenter {
@@ -34,15 +39,35 @@ final class SearchPresenter {
 
 extension SearchPresenter: SearchPresenterInput {
     func searchButtonClicked(searchWord: String) {
+        if searchWord.count != 0 {
+            view?.showHud()
+        } else {
+            view?.showNothingEnteredAlert()
+            return
+        }
         APIClient.fetchRepository(searchWord: searchWord, completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let gitHubResponse):
                 self.repositories = gitHubResponse.items
-                DispatchQueue.main.async {
-                    self.view?.reloadTableView()
+                if self.repositories.count == 0 {
+                    DispatchQueue.main.async {
+                        self.view?.hideHud()
+                        self.view?.showSearchResultsNotFountAlert()
+                        self.view?.reloadTableView()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.view?.reloadTableView()
+                        self.view?.hideHud()
+                    }
                 }
             case .failure(let error):
+                DispatchQueue.main.async {
+                    self.view?.hideHud()
+                    self.view?.showNetworkErrorAlert()
+                    self.view?.reloadTableView()
+                }
                 print(error)
             }
         })
