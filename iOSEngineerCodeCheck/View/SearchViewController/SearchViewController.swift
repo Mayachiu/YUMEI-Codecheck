@@ -32,6 +32,8 @@ final class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
+        tableView.keyboardDismissMode = .onDrag
+
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
     }
 }
