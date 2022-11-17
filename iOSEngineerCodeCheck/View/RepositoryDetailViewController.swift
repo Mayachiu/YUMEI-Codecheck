@@ -31,8 +31,6 @@ final class RepositoryDetailViewController: UIViewController {
 
         presenter.viewDidLoad(repository: repositories[selectedIndex])
     }
-
-
 }
 
 extension RepositoryDetailViewController: RepositoryDetailPresenterOutput {
