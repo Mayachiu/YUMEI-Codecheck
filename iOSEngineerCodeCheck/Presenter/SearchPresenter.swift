@@ -54,6 +54,7 @@ extension SearchPresenter: SearchPresenterInput {
                     DispatchQueue.main.async {
                         self.view?.hideHud()
                         self.view?.showSearchResultsNotFountAlert()
+                        self.view?.reloadTableView()
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -65,6 +66,7 @@ extension SearchPresenter: SearchPresenterInput {
                 DispatchQueue.main.async {
                     self.view?.hideHud()
                     self.view?.showNetworkErrorAlert()
+                    self.view?.reloadTableView()
                 }
                 print(error)
             }
