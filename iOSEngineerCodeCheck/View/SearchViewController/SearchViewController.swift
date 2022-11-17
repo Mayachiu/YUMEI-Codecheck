@@ -103,7 +103,7 @@ extension SearchViewController: SearchPresenterOutput {
     }
 
     func showNothingEnteredAlert() {
-        configureSearchResultsNotFountAlert()
+        configureNothingEnteredAlert()
     }
 
     func showNetworkErrorAlert() {
