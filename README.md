@@ -13,7 +13,7 @@
 - CocoaPods 1.11.3
 
 ## セットアップ
-YUMEI-Codecheck下で
+YUMEMI-Codecheck下で
 
 ```
 pod install
