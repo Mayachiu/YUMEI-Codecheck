@@ -18,8 +18,6 @@ final class SearchViewController: UIViewController {
     private var fullName: String = ""
     private var language: String? = ""
 
-    private var task: URLSessionTask?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = SearchPresenter.init(view: self, repositories: [])
@@ -43,10 +41,6 @@ extension SearchViewController: UISearchBarDelegate {
         // 初期テキストの消去
         searchBar.text = ""
         return true
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        task?.cancel()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
